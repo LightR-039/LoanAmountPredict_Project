@@ -7,10 +7,13 @@ This project implements two regression models—Random Forest and Linear Regress
 ### Dataset
 The dataset used in this project is the Loan Approval Classification Dataset from Kaggle. It contains 45,000 records and 14 variables, including features related to credit profiles (e.g., credit score, payment history), demographic profiles (e.g., age, income), and loan-related data (e.g., loan term, interest rate). Originally intended for classifying loan approval status, this project uses the dataset for regression to predict the loan amount, a continuous target variable. The dataset is provided in CSV format and should be placed in the data/ directory (not tracked in Git). Download the dataset from the Kaggle link and place it in the data/ folder before running the notebooks. Refer to the Kaggle dataset page for licensing and usage terms.
 
+[Data Source](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data)
+
 ### Features
 - Preprocessing:
   - Checks for missing values and removes or imputes them as needed.
   - Identifies and eliminates duplicate records to ensure data quality.
+  - Imputes loan_amnt for non-approved loans (loan_status == 0) using KNeighborsRegressor trained on approved loans (loan_status == 1) with features: person_income, credit_score, loan_int_rate, person_education, person_home_ownership_RENT, loan_intent_VENTURE, mitigating noise in the target variable.
 - Encodes categorical variables:
   - Binary encoding for binary features like gender and loan default history.
   - Ordinal encoding for education level to preserve order.
@@ -58,10 +61,18 @@ The performance of the Random Forest and Linear Regression models is evaluated u
 - Mean Absolute Error (MAE): 4,677.43
 - R² Score: -0.00
 
-
+![Model Result](https://github.com/user-attachments/assets/300dd231-fc43-4fd7-a2da-8f628303350b)
 
 #### Learning Curve
 The following learning curve illustrates how the R² score varies with training set size for the Random Forest and Linear Regression models:
 
+![Learning Curve](https://github.com/user-attachments/assets/3abab688-10f6-4265-9816-af5057484992)
 
-Additional visualizations, including residual plots, R² comparisons, and RMSE distributions, are available in `notebooks/Loan Amount prediction.ipynb`.
+
+Additional visualizations are available in `notebooks/Loan_Amount_prediction.ipynb`.
+
+### Acknowledgments
+- Thanks to scikit-learn for the machine learning framework.
+- Dataset provided by Kaggle: Loan Approval Classification Dataset.
+- Visualization tools powered by seaborn and matplotlib.
+- Additional tools: category_encoders for encoding, joblib for model persistence, and comprehensive dependencies managed via requirements.txt.
